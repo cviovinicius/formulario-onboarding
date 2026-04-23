@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vamos começar</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f9f8f6;--surface:#fff;--border:#e4e2dc;
+  --text:#1a1917;--muted:#6b6860;--accent:#1a1917;
+  --accent-light:#f0efe9;--danger:#b83232;--radius:10px;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:48px 16px 80px}
+.wrapper{width:100%;max-width:580px}
+
+.header{margin-bottom:36px}
+.header-label{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.header h1{font-family:'DM Serif Display',serif;font-size:32px;font-weight:400;line-height:1.2;margin-bottom:8px}
+.header p{font-size:14px;color:var(--muted);line-height:1.6}
+
+.progress-bar{height:2px;background:var(--border);border-radius:2px;margin-bottom:36px;overflow:hidden}
+.progress-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .4s ease}
+
+.step{display:none}.step.active{display:block}
+.step-label{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.step-title{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;margin-bottom:6px}
+.step-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:26px}
+
+.field{margin-bottom:20px}
+label.field-label{display:block;font-size:13px;font-weight:500;color:var(--text);margin-bottom:7px}
+.req{color:var(--danger);margin-left:2px}
+.hint{font-weight:400;color:var(--muted);font-size:12px;display:block;margin-top:2px}
+
+input[type=text],input[type=email],input[type=tel],input[type=url],textarea,select{
+  width:100%;padding:11px 14px;border:1px solid var(--border);border-radius:var(--radius);
+  font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--surface);
+  outline:none;transition:border-color .15s;-webkit-appearance:none;appearance:none
+}
+input:focus,textarea:focus,select:focus{border-color:var(--accent)}
+textarea{resize:vertical;min-height:88px;line-height:1.6}
+
+.radio-group,.checkbox-group{display:flex;flex-direction:column;gap:8px}
+.check-item,.radio-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:background .15s,border-color .15s;font-size:14px;user-select:none;-webkit-user-select:none}
+.check-item:hover,.radio-item:hover{background:var(--accent-light)}
+.check-item.selected,.radio-item.selected{border-color:var(--accent);background:var(--accent-light)}
+.check-item input,.radio-item input{position:absolute;opacity:0;pointer-events:none;width:0;height:0}
+.check-box{width:16px;height:16px;border:1.5px solid var(--border);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s}
+.check-item.selected .check-box{background:var(--accent);border-color:var(--accent)}
+.check-item.selected .check-box::after{content:'✓';color:#fff;font-size:10px}
+.radio-dot{width:16px;height:16px;border:1.5px solid var(--border);border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:border-color .15s}
+.radio-item.selected .radio-dot{border-color:var(--accent)}
+.radio-item.selected .radio-dot::after{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent);display:block}
+
+.outro-wrap{margin-top:8px;display:none}
+.outro-wrap.visible{display:block}
+
+.service-cards{display:grid;grid-template-columns:1fr;gap:10px}
+.service-card{padding:18px 20px;border:1.5px solid var(--border);border-radius:14px;cursor:pointer;transition:border-color .2s,background .2s}
+.service-card:hover{border-color:#aaa;background:var(--accent-light)}
+.service-card.selected{border-color:var(--accent);background:var(--accent-light)}
+.service-card .badge{display:inline-block;font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:20px;background:var(--border);color:var(--muted);margin-bottom:8px;transition:background .2s,color .2s}
+.service-card.selected .badge{background:var(--accent);color:#fff}
+.service-card h3{font-family:'DM Serif Display',serif;font-size:18px;font-weight:400;margin-bottom:4px}
+.service-card p{font-size:13px;color:var(--muted);line-height:1.5}
+
+.profile-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.profile-card{padding:20px 16px;border:1.5px solid var(--border);border-radius:14px;cursor:pointer;transition:border-color .2s,background .2s;text-align:center}
+.profile-card:hover{border-color:#aaa;background:var(--accent-light)}
+.profile-card.selected{border-color:var(--accent);background:var(--accent-light)}
+.profile-card .picon{font-size:26px;margin-bottom:10px}
+.profile-card h3{font-size:15px;font-weight:500;margin-bottom:4px;color:var(--text)}
+.profile-card p{font-size:12px;color:var(--muted);line-height:1.5}
+
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:28px;gap:12px}
+.btn{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;padding:12px 24px;border-radius:var(--radius);cursor:pointer;border:none;transition:opacity .15s,transform .1s}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{opacity:.85}
+.btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border)}
+.btn-ghost:hover{background:var(--accent-light)}
+
+.step-counter{font-size:12px;color:var(--muted)}
+.error-msg{display:none;font-size:12px;color:var(--danger);margin-top:5px}
+.field.has-error input,.field.has-error textarea{border-color:var(--danger)}
+.field.has-error .error-msg{display:block}
+
+.success-screen{display:none;text-align:center;padding:60px 0}
+.success-icon{width:52px;height:52px;border-radius:50%;background:var(--accent);color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;margin:0 auto 24px}
+.success-screen h2{font-family:'DM Serif Display',serif;font-size:26px;font-weight:400;margin-bottom:10px}
+.success-screen p{font-size:14px;color:var(--muted);line-height:1.7}
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="header">
+    <div class="header-label">Onboarding</div>
+    <h1>Vamos começar.</h1>
+    <p>Preencha as informações abaixo para darmos o primeiro passo juntos. Leva cerca de 5 minutos.</p>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+
+  <form id="mainForm" action="https://formspree.io/f/xgoppzdp" method="POST">
+    <input type="hidden" name="_subject" value="Novo onboarding recebido">
+    <input type="hidden" name="Serviço contratado" id="hServico">
+    <input type="hidden" name="Perfil do cliente" id="hPerfil">
+
+    <!-- ═══════════════════════════════════
+         STEP 0 — Escolha do serviço
+    ════════════════════════════════════ -->
+    <div class="step active" data-step="0">
+      <div class="step-label" id="lbl0">Passo 1</div>
+      <div class="step-title">Com o que você precisa de ajuda?</div>
+      <div class="step-desc">Essa escolha define as perguntas que vou fazer a seguir.</div>
+      <div class="service-cards">
+        <div class="service-card" data-value="Tráfego Pago" onclick="pickService(this)">
+          <div class="badge">A</div>
+          <h3>Tráfego Pago</h3>
+          <p>Google Ads e/ou Meta Ads — geração de leads, conversões e visibilidade paga.</p>
+        </div>
+        <div class="service-card" data-value="Conteúdo Orgânico" onclick="pickService(this)">
+          <div class="badge">B</div>
+          <h3>Conteúdo Orgânico</h3>
+          <p>Estratégia e produção de conteúdo para Instagram — crescimento e posicionamento.</p>
+        </div>
+        <div class="service-card" data-value="Tráfego Pago + Conteúdo Orgânico" onclick="pickService(this)">
+          <div class="badge">C</div>
+          <h3>Tráfego Pago + Conteúdo</h3>
+          <p>Os dois juntos — estratégia integrada de mídia paga e presença orgânica.</p>
+        </div>
+      </div>
+      <div class="nav">
+        <span class="step-counter" id="sc0">1 de —</span>
+        <button type="button" class="btn btn-primary" onclick="nextStep()">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         STEP 1 — Perfil do cliente
+    ════════════════════════════════════ -->
+    <div class="step" data-step="1">
+      <div class="step-label" id="lbl1"></div>
+      <div class="step-title">Você é profissional liberal ou tem uma empresa?</div>
+      <div class="step-desc">Isso define quais perguntas fazem sentido para o seu caso.</div>
+      <div class="profile-cards">
+        <div class="profile-card" data-value="Profissional Liberal" onclick="pickProfile(this)">
+          <div class="picon">👤</div>
+          <h3>Profissional liberal</h3>
+          <p>Médico, psicólogo, nutricionista, advogado, fisioterapeuta e similares.</p>
+        </div>
+        <div class="profile-card" data-value="Empresa / Comércio" onclick="pickProfile(this)">
+          <div class="picon">🏢</div>
+          <h3>Empresa / Comércio</h3>
+          <p>Negócio com CNPJ, equipe ou operação estruturada.</p>
+        </div>
+      </div>
+      <div class="nav">
+        <button type="button" class="btn btn-ghost" onclick="prevStep()">← Voltar</button>
+        <span class="step-counter" id="sc1"></span>
+        <button type="button" class="btn btn-primary" onclick="nextStep()">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         STEP 2 — Dados pessoais (Liberal)
+    ════════════════════════════════════ -->
+    <div class="step" data-step="2">
+      <div class="step-label" id="lbl2"></div>
+      <div class="step-title">Seus dados de contato</div>
+      <div class="step-desc">Informações básicas para configurar tudo corretamente.</div>
+
+      <div class="field" id="f-nome-lib">
+        <label class="field-label">Seu nome completo <span class="req">*</span></label>
+        <input type="text" name="Nome" placeholder="Ex: Dra. Ana Lima">
+        <div class="error-msg">Campo obrigatório.</div>
+      </div>
+      <div class="field" id="f-especialidade">
+        <label class="field-label">Sua especialidade ou área de atuação <span class="req">*</span>
+          <span class="hint">Ex: psiquiatria, nutrição esportiva, direito à saúde, fisioterapia pélvica</span>
+        </label>
+        <input type="text" name="Especialidade" placeholder="Ex: psicologia clínica — ansiedade e depressão">
+        <div class="error-msg">Campo obrigatório.</div>
+      </div>
+      <div class="field" id="f-instagram-lib">
+        <label class="field-label">Instagram <span class="req">*</span></label>
+        <input type="text" name="Instagram" placeholder="@seuperfil">
+        <div class="error-msg">Campo obrigatório.</div>
+      </div>
+      <div class="field" id="f-whatsapp-lib">
+        <label class="field-label">WhatsApp de contato <span class="req">*</span></label>
+        <input type="tel" name="WhatsApp" placeholder="(11) 99999-9999">
+        <div class="error-msg">Campo obrigatório.</div>
+      </div>
+      <div class="field" id="f-email-lib">
+        <label class="field-label">Email <span class="req">*</span></label>
+        <input type="email" name="Email" placeholder="voce@email.com">
+        <div class="error-msg">Campo obrigatório.</div>
+      </div>
+      <div class="field">
+        <label class="field-label">Site ou link de agendamento
+          <span class="hint">Opcional</span>
+        </label>
+        <input type="url" name="Site" placeholder="https://...">
+      </div>
+
+      <div class="nav">
+        <button type="button" class="btn btn-ghost" onclick="prevStep()">← Voltar</button>
+        <span class="step-counter" id="sc2"></span>
+        <button type="button" class="btn btn-primary" onclick="nextStep()">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         STEP 3 — Dados da empresa
+    ════════════════════════════════════ -->
+    <div class="step" data-step="3">
+      <div class="step-label" id="lbl3"></div>
+      <div class="step-title">Dados da empresa</div>
+      <div class="step-desc">Informações básicas para configurar tudo corretamente.</div>
+
+      <div class="field" id="f-nome-emp">
+        <label class="field-label">Nome da empresa <span class="req">*</span></label>
+        <input type="text" name="Nome da empresa" placeholder="Ex: Studio Bela Forma">
+        <div class="error-msg">Campo obrigatório.</div>
+      </div>
+      <div class="field" id="f-site-emp">
+        <label class="field-label">Site <span class="req">*</span></label>
+        <input type="url" name="Site" placeholder="https://www.suaempresa.com.br">
+        <div class="error-msg">Campo obrigatório.</div>
+      </div>
+      <div class="field" id="f-regioes">
+        <label class="field-label">Quais regiões vocês atendem? <span class="req">*</span>
+          <span class="hint">Ex: cidade, estado, todo o Brasil</span>
+        </label>
+        <input type="text" name="Regiões atendidas" placeholder="Ex: Grande São Paulo e interior">
+        <div class="error-msg">Campo obrigatório.</div>
+      </div>
+      <div class="field" id="f-instagram-emp">
+        <label class="field-label">Instagram <span class="req">*</span></label>
+        <input type="text" name="Instagram" placeholder="@suaempresa">
+        <div class="error-msg">Campo obrigatório.</div>
+      </div>
+      <div class="field" id="f-whatsapp-emp">
+        <label class="field-label">WhatsApp comercial <span class="req">*</span></label>
+        <input type="tel" name="WhatsApp" placeholder="(11) 99999-9999">
+        <div class="error-msg">Campo obrigatório.</div>
+      </div>
+      <div class="field" id="f-email-emp">
+        <label class="field-label">Email comercial <span class="req">*</span></label>
+        <input type="email" name="Email" placeholder="contato@empresa.com.br">
+        <div class="error-msg">Campo obrigatório.</div>
+      </div>
+
+      <div class="nav">
+        <button type="button" class="btn btn-ghost" onclick="prevStep()">← Voltar</button>
+        <span class="step-counter" id="sc3"></span>
+        <button type="button" class="btn btn-primary" onclick="nextStep()">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         STEP 4 — Ads · Liberal
+    ════════════════════════════════════ -->
+    <div class="step" data-step="4">
+      <div class="step-label" id="lbl4"></div>
+      <div class="step-title">Sobre seus serviços e clientes</div>
+      <div class="step-desc">Essas informações definem como as campanhas vão ser estruturadas para atrair os clientes certos.</div>
+
+      <div class="field" id="f-servicos-lib">
+        <label class="field-label">Quais serviços você presta hoje? <span class="req">*</span>
+          <span class="hint">Liste todos — consultas, programas, acompanhamentos, grupos, etc.</span>
+        </label>
+        <textarea name="Serviços prestados" placeholder="Ex: consultas individuais, grupos terapêuticos, orientação de pais..."></textarea>
+        <div class="error-msg">Campo obrigatório.</div>
+      </div>
+      <div class="field" id="f-prio-lib">
+        <label class="field-label">Quais são PRIORITÁRIOS neste momento? <span class="req">*</span>
+          <span class="hint">O que você quer atrair com mais frequência agora?</span>
+        </label>
+        <textarea name="Serviços prioritários" placeholder="Ex: consultas particulares de avaliação inicial e acompanhamento mensal..."></textarea>
+        <div class="error-msg">Campo obrigatório.</div>
+      </div>
+      <div class="field" id="f-quem-lib">
+        <label class="field-label">Quem normalmente entra em contato para esse tipo de serviço? <span class="req">*</span></label>
+        <div class="checkbox-group" id="cg-quem">
+          <div class="check-item" onclick="selectCheck(this,'cg-quem')">
+            <input type="checkbox" name="Quem entra em contato" value="O próprio paciente/cliente">
+            <div class="check-box"></div>O próprio paciente/cliente
+          </div>
+          <div class="check-item" onclick="selectCheck(this,'cg-quem')">
+            <input type="checkbox" name="Quem entra em contato" value="Familiar ou responsável">
+            <div class="check-box"></div>Familiar ou responsável
+          </div>
+          <div class="check-item" onclick="selectCheck(this,'cg-quem')">
+            <input type="checkbox" name="Quem entra em contato" value="Médico ou profissional que indica">
+            <div class="check-box"></div>Médico ou profissional que indica
+          </div>
+          <div class="check-item" onclick="selectCheck(this,'cg-quem')">
+            <input type="checkbox" name="Quem entra em contato" value="Empresa (plano de saúde, RH)">
+            <div class="check-box"></div>Empresa (plano de saúde, RH)
+          </div>
+          <div class="check-item" onclick="selectCheck(this,'cg-quem',99,true)">
+            <input type="checkbox" name="Quem entra em contato" value="Outro">
+            <div class="check-box"></div>Outro
+          </div>
+        </div>
+        <div class="outro-wrap" id="outro-quem">
+          <input type="text" name="Quem entra em contato (outro)" placeholder="Descreva...">
+        </div>
+        <div class="error-msg">Selecione ao menos uma opção.</div>
+      </div>
+      <div class="field" id="f-perfil-ideal">
+        <label class="field-label">Como você descreveria o perfil ideal de cliente para você hoje? <span class="req">*</span>
+          <span class="hint">Ex: urgência do caso, capacidade de decisão, ticket esperado, faixa etária</span>
+        </label>
+        <textarea name="Perfil ideal de cliente" placeholder="Ex: adultos 30-50 anos, buscam resultado rápido, pagam particular, já tentaram outras abordagens..."></textarea>
+        <div class="error-msg">Campo obrigatório.</div>
+      </div>
+      <div class="field" id="f-online-lib">
+        <label class="field-label">Você atende de forma 100% online? <span class="req">*</span></label>
+        <div class="radio-group" id="rg-online">
+          <div class="radio-item" onclick="selectRadio(this,'rg-online','Modalidade de atendimento')">
+            <input type="radio" name="Modalidade de atendimento" value="Sim, 100% online">
+            <div class="radio-dot"></div>Sim, 100% online
+          </div>
+          <div class="radio-item" onclick="selectRadio(this,'rg-online','Modalidade de atendimento')">
+            <input type="radio" name="Modalidade de atendimento" value="Não, somente presencial">
+            <div class="radio-dot"></div>Não, somente presencial
+          </div>
+          <div class="radio-item" onclick="selectRadio(this,'rg-online','Modalidade de atendimento')">
+            <input type="radio" name="Modalidade de atendimento" value="Híbrido — online e presencial">
+            <div class="radio-dot"></div>Híbrido — online e presencial
+          </div>
+        </div>
+        <div class="error-msg">Selecione uma opção.</div>
+      </div>
+
+      <div class="nav">
+        <button type="button" class="btn btn-ghost" onclick="prevStep()">← Voltar</button>
+        <span class="step-counter" id="sc4"></span>
+        <button type="button" class="btn btn-primary" onclick="nextStep()">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         STEP 5 — Ads · Empresa
+    ════════════════════════════════════ -->
+    <div class="step" data-step="5">
+      <div class="step-label" id="lbl5"></div>
+      <div class="step-title">Sobre os serviços e clientes</div>
+      <div class="step-desc">Essas informações definem a estrutura das campanhas e as palavras-chave mais relevantes.</div>
+
+      <div class="field" id="f-servicos-emp">
+        <label class="field-label">Quais serviços vocês querem priorizar neste primeiro momento? <span class="req">*</span>
+          <span class="hint">Escolha até 3</span>
+        </label>
+        <div class="checkbox-group" id="cg-servicos-emp">
+          <div class="check-item" onclick="selectCheck(this,'cg-servicos-emp',3)">
+            <input type="checkbox" name="Serviços prioritários" value="Produto ou serviço principal 1">
+            <div class="check-box"></div>Produto ou serviço principal 1
+          </div>
+          <div class="check-item" onclick="selectCheck(this,'cg-servicos-emp',3)">
+            <input type="checkbox" name="Serviços prioritários" value="Produto ou serviço principal 2">
+            <div class="check-box"></div>Produto ou serviço principal 2
+          </div>
+          <div class="check-item" onclick="selectCheck(this,'cg-servicos-emp',3)">
+            <input type="checkbox" name="Serviços prioritários" value="Produto ou serviço principal 3">
+            <div class="check-box"></div>Produto ou serviço principal 3
+          </div>
+          <div class="check-item" onclick="selectCheck(this,'cg-servicos-emp',3,true)">
+            <input type="checkbox" name="Serviços prioritários" value="Outro">
+            <div class="check-box"></div>Outro
+          </div>
+        </div>
+        <div class="outro-wrap" id="outro-servicos-emp">
+          <input type="text" name="Serviços prioritários (outro)" placeholder="Descreva seus serviços...">
+        </div>
+        <div class="error-msg">Selecione ao menos uma opção.</div>
+      </div>
+      <div class="field" id="f-clientes-emp">
+        <label class="field-label">Quais tipos de clientes vocês atendem principalmente? <span class="req">*</span></label>
+        <div class="checkbox-group" id="cg-clientes-emp">
+          <div class="check-item" onclick="selectCheck(this,'cg-clientes-emp')">
+            <input type="checkbox" name="Tipos de clientes" value="Pessoa física (consumidor final)">
+            <div class="check-box"></div>Pessoa física (consumidor final)
+          </div>
+          <div class="check-item" onclick="selectCheck(this,'cg-clientes-emp')">
+            <input type="checkbox" name="Tipos de clientes" value="Pequenas e médias empresas">
+            <div class="check-box"></div>Pequenas e médias empresas
+          </div>
+          <div class="check-item" onclick="selectCheck(this,'cg-clientes-emp')">
+            <input type="checkbox" name="Tipos de clientes" value="Grandes empresas">
+            <div class="check-box"></div>Grandes empresas
+          </div>
+          <div class="check-item" onclick="selectCheck(this,'cg-clientes-emp')">
+            <input type="checkbox" name="Tipos de clientes" value="Profissionais liberais">
+            <div class="check-box"></div>Profissionais liberais
+          </div>
+          <div class="check-item" onclick="selectCheck(this,'cg-clientes-emp',99,true)">
+            <input type="checkbox" name="Tipos de clientes" value="Outro">
+            <div class="check-box"></div>Outro
+          </div>
+        </div>
+        <div class="outro-wrap" id="outro-clientes-emp">
+          <input type="text" name="Tipos de clientes (outro)" placeholder="Descreva...">
+        </div>
+        <div class="error-msg">Selecione ao menos uma opção.</div>
+      </div>
+      <div class="field" id="f-resp-emp">
+        <label class="field-label">Quem vai responder os leads das campanhas? <span class="req">*</span></label>
+        <input type="text" name="Responsável pelos leads" placeholder="Ex: equipe comercial, secretária, eu mesmo...">
+        <div class="error-msg">Campo obrigatório.</div>
+      </div>
+      <div class="field" id="f-destino-emp">
+        <label class="field-label">Para onde os leads devem ser direcionados? <span class="req">*</span></label>
+        <div class="radio-group" id="rg-destino-emp">
+          <div class="radio-item" onclick="selectRadio(this,'rg-destino-emp','Destino dos leads')">
+            <input type="radio" name="Destino dos leads" value="WhatsApp">
+            <div class="radio-dot"></div>WhatsApp
+          </div>
+          <div class="radio-item" onclick="selectRadio(this,'rg-destino-emp','Destino dos leads')">
+            <input type="radio" name="Destino dos leads" value="Formulário no site">
+            <div class="radio-dot"></div>Formulário no site
+          </div>
+          <div class="radio-item" onclick="selectRadio(this,'rg-destino-emp','Destino dos leads')">
+            <input type="radio" name="Destino dos leads" value="Ligação telefônica">
+            <div class="radio-dot"></div>Ligação telefônica
+          </div>
+          <div class="radio-item" onclick="selectRadio(this,'rg-destino-emp','Destino dos leads',true)">
+            <input type="radio" name="Destino dos leads" value="Outro">
+            <div class="radio-dot"></div>Outro
+          </div>
+        </div>
+        <div class="outro-wrap" id="outro-destino-emp">
+          <input type="text" name="Destino dos leads (outro)" placeholder="Descreva...">
+        </div>
+        <div class="error-msg">Selecione uma opção.</div>
+      </div>
+
+      <div class="nav">
+        <button type="button" class="btn btn-ghost" onclick="prevStep()">← Voltar</button>
+        <span class="step-counter" id="sc5"></span>
+        <button type="button" class="btn btn-primary" onclick="nextStep()">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         STEP 6 — Diferenciais + Concorrência (Ads)
+    ════════════════════════════════════ -->
+    <div class="step" data-step="6">
+      <div class="step-label" id="lbl6"></div>
+      <div class="step-title">Diferenciais e concorrência</div>
+      <div class="step-desc">Esses dados constroem os textos dos anúncios e posicionam você em relação ao mercado.</div>
+
+      <div class="field" id="f-porq">
+        <label class="field-label">Por que um cliente deveria te escolher? <span class="req">*</span>
+          <span class="hint">Ex: experiência, método próprio, resultado comprovado, atendimento humanizado</span>
+        </label>
+        <textarea name="Diferenciais" placeholder="Descreva o que te torna a melhor escolha..."></textarea>
+        <div class="error-msg">Campo obrigatório.</div>
+      </div>
+      <div class="field" id="f-conc">
+        <label class="field-label">Quem você considera concorrentes diretos? <span class="req">*</span>
+          <span class="hint">Nomes, perfis ou sites — quanto mais específico, melhor</span>
+        </label>
+        <textarea name="Concorrentes" placeholder="Ex: Clínica X, Dr. Fulano (@perfil), www.site.com.br..."></textarea>
+        <div class="error-msg">Campo obrigatório.</div>
+      </div>
+
+      <div class="nav">
+        <button type="button" class="btn btn-ghost" onclick="prevStep()">← Voltar</button>
+        <span class="step-counter" id="sc6"></span>
+        <button type="button" class="btn btn-primary" onclick="nextStep()">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         STEP 7 — Orgânico · Liberal
+    ════════════════════════════════════ -->
+    <div class="step" data-step="7">
+      <div class="step-label" id="lbl7"></div>
+      <div class="step-title">Sobre seu conteúdo</div>
+      <div class="step-desc">Essas informações definem a estratégia, o posicionamento e o tipo de conteúdo que vamos criar.</div>
+
+      <div class="field" id="f-foco-lib">
+        <label class="field-label">Qual será o foco principal do seu conteúdo? <span class="req">*</span>
+          <span class="hint">Ex: saúde mental no trabalho, nutrição para atletas amadores, direito do paciente</span>
+        </label>
+        <textarea name="Foco do conteúdo" placeholder="Descreva o tema central que você quer trabalhar no Instagram..."></textarea>
+        <div class="error-msg">Campo obrigatório.</div>
+      </div>
+      <div class="field" id="f-publico-lib">
+        <label class="field-label">Como você descreveria o público que deseja atingir? <span class="req">*</span>
+          <span class="hint">Ex: perfil, faixa etária, principais dores, contexto de vida</span>
+        </label>
+        <textarea name="Público-alvo" placeholder="Ex: mulheres 30-45 anos que sofrem com ansiedade e buscam uma abordagem sem julgamentos..."></textarea>
+        <div class="error-msg">Campo obrigatório.</div>
+      </div>
+
+      <div class="nav">
+        <button type="button" class="btn btn-ghost" onclick="prevStep()">← Voltar</button>
+        <span class="step-counter" id="sc7"></span>
+        <button type="button" class="btn btn-primary" onclick="nextStep()">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         STEP 8 — Orgânico · Empresa
+    ════════════════════════════════════ -->
+    <div class="step" data-step="8">
+      <div class="step-label" id="lbl8"></div>
+      <div class="step-title">Sobre seu conteúdo</div>
+      <div class="step-desc">Essas informações definem a estratégia, o posicionamento e o tipo de conteúdo que vamos criar.</div>
+
+      <div class="field" id="f-foco-emp">
+        <label class="field-label">Qual será o foco principal do conteúdo? <span class="req">*</span>
+          <span class="hint">Ex: educação financeira, bastidores do negócio, dicas do setor</span>
+        </label>
+        <textarea name="Foco do conteúdo" placeholder="Descreva o tema central que vocês querem trabalhar no Instagram..."></textarea>
+        <div class="error-msg">Campo obrigatório.</div>
+      </div>
+      <div class="field" id="f-publico-emp-org">
+        <label class="field-label">Como você descreveria o público que deseja atingir? <span class="req">*</span>
+          <span class="hint">Ex: perfil, faixa etária, principais dores, contexto</span>
+        </label>
+        <textarea name="Público-alvo" placeholder="Ex: empresários de pequenos negócios que querem profissionalizar a operação..."></textarea>
+        <div class="error-msg">Campo obrigatório.</div>
+      </div>
+      <div class="field" id="f-tom-emp">
+        <label class="field-label">Qual tom de voz combina mais com a marca? <span class="req">*</span>
+          <span class="hint">Escolha até 2</span>
+        </label>
+        <div class="checkbox-group" id="cg-tom">
+          <div class="check-item" onclick="selectCheck(this,'cg-tom',2)">
+            <input type="checkbox" name="Tom de voz" value="Autoridade e expertise">
+            <div class="check-box"></div>Autoridade e expertise
+          </div>
+          <div class="check-item" onclick="selectCheck(this,'cg-tom',2)">
+            <input type="checkbox" name="Tom de voz" value="Próximo e acolhedor">
+            <div class="check-box"></div>Próximo e acolhedor
+          </div>
+          <div class="check-item" onclick="selectCheck(this,'cg-tom',2)">
+            <input type="checkbox" name="Tom de voz" value="Educativo e didático">
+            <div class="check-box"></div>Educativo e didático
+          </div>
+          <div class="check-item" onclick="selectCheck(this,'cg-tom',2)">
+            <input type="checkbox" name="Tom de voz" value="Descontraído e bem-humorado">
+            <div class="check-box"></div>Descontraído e bem-humorado
+          </div>
+          <div class="check-item" onclick="selectCheck(this,'cg-tom',2,true)">
+            <input type="checkbox" name="Tom de voz" value="Outro">
+            <div class="check-box"></div>Outro
+          </div>
+        </div>
+        <div class="outro-wrap" id="outro-tom">
+          <input type="text" name="Tom de voz (outro)" placeholder="Descreva...">
+        </div>
+        <div class="error-msg">Selecione ao menos uma opção.</div>
+      </div>
+
+      <div class="nav">
+        <button type="button" class="btn btn-ghost" onclick="prevStep()">← Voltar</button>
+        <span class="step-counter" id="sc8"></span>
+        <button type="button" class="btn btn-primary" onclick="nextStep()">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         STEP 9 — Produção de conteúdo (Orgânico)
+    ════════════════════════════════════ -->
+    <div class="step" data-step="9">
+      <div class="step-label" id="lbl9"></div>
+      <div class="step-title">Produção de conteúdo</div>
+      <div class="step-desc">Detalhes que definem o ritmo e os limites do que vamos criar juntos.</div>
+
+      <div class="field" id="f-freq">
+        <label class="field-label">Com que frequência você acredita conseguir produzir conteúdo? <span class="req">*</span>
+          <span class="hint">Isso define o ritmo de roteiros e a estratégia de publicação</span>
+        </label>
+        <div class="radio-group" id="rg-freq">
+          <div class="radio-item" onclick="selectRadio(this,'rg-freq','Frequência de produção')">
+            <input type="radio" name="Frequência de produção" value="1 a 2 vezes por semana">
+            <div class="radio-dot"></div>1 a 2 vezes por semana
+          </div>
+          <div class="radio-item" onclick="selectRadio(this,'rg-freq','Frequência de produção')">
+            <input type="radio" name="Frequência de produção" value="3 a 4 vezes por semana">
+            <div class="radio-dot"></div>3 a 4 vezes por semana
+          </div>
+          <div class="radio-item" onclick="selectRadio(this,'rg-freq','Frequência de produção')">
+            <input type="radio" name="Frequência de produção" value="Praticamente todo dia">
+            <div class="radio-dot"></div>Praticamente todo dia
+          </div>
+          <div class="radio-item" onclick="selectRadio(this,'rg-freq','Frequência de produção')">
+            <input type="radio" name="Frequência de produção" value="Ainda não sei — preciso de orientação">
+            <div class="radio-dot"></div>Ainda não sei — preciso de orientação
+          </div>
+        </div>
+        <div class="error-msg">Selecione uma opção.</div>
+      </div>
+      <div class="field">
+        <label class="field-label">Existe algum tema que você prefere evitar no conteúdo?
+          <span class="hint">Opcional</span>
+        </label>
+        <textarea name="Temas a evitar" placeholder="Ex: política, comparações com concorrentes, temas muito técnicos sem tradução..."></textarea>
+      </div>
+      <div class="field" id="f-ig-status">
+        <label class="field-label">Como está o seu Instagram hoje? <span class="req">*</span></label>
+        <div class="radio-group" id="rg-ig-status">
+          <div class="radio-item" onclick="selectRadio(this,'rg-ig-status','Status do Instagram')">
+            <input type="radio" name="Status do Instagram" value="Ativo e já publico com frequência">
+            <div class="radio-dot"></div>Ativo e já publico com frequência
+          </div>
+          <div class="radio-item" onclick="selectRadio(this,'rg-ig-status','Status do Instagram')">
+            <input type="radio" name="Status do Instagram" value="Existe mas está parado há um tempo">
+            <div class="radio-dot"></div>Existe mas está parado há um tempo
+          </div>
+          <div class="radio-item" onclick="selectRadio(this,'rg-ig-status','Status do Instagram')">
+            <input type="radio" name="Status do Instagram" value="Estou começando do zero">
+            <div class="radio-dot"></div>Estou começando do zero
+          </div>
+        </div>
+        <div class="error-msg">Selecione uma opção.</div>
+      </div>
+
+      <div class="nav">
+        <button type="button" class="btn btn-ghost" onclick="prevStep()">← Voltar</button>
+        <span class="step-counter" id="sc9"></span>
+        <button type="button" class="btn btn-primary" onclick="nextStep()">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         STEP 10 — Materiais (todos convergem)
+    ════════════════════════════════════ -->
+    <div class="step" data-step="10">
+      <div class="step-label" id="lbl10"></div>
+      <div class="step-title">Materiais disponíveis</div>
+      <div class="step-desc">Esses materiais aceleram a criação dos anúncios e fortalecem a identidade visual.</div>
+
+      <div class="field">
+        <label class="field-label">O que você já tem disponível?</label>
+        <div class="checkbox-group" id="cg-materiais">
+          <div class="check-item" onclick="selectCheck(this,'cg-materiais')">
+            <input type="checkbox" name="Materiais disponíveis" value="Logo em alta qualidade">
+            <div class="check-box"></div>Logo em alta qualidade
+          </div>
+          <div class="check-item" onclick="selectCheck(this,'cg-materiais')">
+            <input type="checkbox" name="Materiais disponíveis" value="Fotos profissionais">
+            <div class="check-box"></div>Fotos profissionais
+          </div>
+          <div class="check-item" onclick="selectCheck(this,'cg-materiais')">
+            <input type="checkbox" name="Materiais disponíveis" value="Vídeos do trabalho ou espaço">
+            <div class="check-box"></div>Vídeos do trabalho ou espaço
+          </div>
+          <div class="check-item" onclick="selectCheck(this,'cg-materiais')">
+            <input type="checkbox" name="Materiais disponíveis" value="Depoimentos de clientes">
+            <div class="check-box"></div>Depoimentos de clientes
+          </div>
+          <div class="check-item" onclick="selectCheck(this,'cg-materiais')">
+            <input type="checkbox" name="Materiais disponíveis" value="Nenhum ainda">
+            <div class="check-box"></div>Nenhum ainda
+          </div>
+        </div>
+      </div>
+
+      <div class="field" id="f-contas-ads">
+        <label class="field-label">Contas de anúncio
+          <span class="hint">Já possui conta no Google Ads ou no Gerenciador de Anúncios da Meta?</span>
+        </label>
+        <div class="checkbox-group" id="cg-contas">
+          <div class="check-item" onclick="selectCheck(this,'cg-contas')">
+            <input type="checkbox" name="Contas existentes" value="Sim, tenho Google Ads">
+            <div class="check-box"></div>Sim, tenho Google Ads
+          </div>
+          <div class="check-item" onclick="selectCheck(this,'cg-contas')">
+            <input type="checkbox" name="Contas existentes" value="Sim, tenho Meta Ads (Gerenciador)">
+            <div class="check-box"></div>Sim, tenho Meta Ads (Gerenciador)
+          </div>
+          <div class="check-item" onclick="selectCheck(this,'cg-contas')">
+            <input type="checkbox" name="Contas existentes" value="Não tenho nenhuma ainda">
+            <div class="check-box"></div>Não tenho nenhuma ainda
+          </div>
+        </div>
+      </div>
+
+      <div class="nav">
+        <button type="button" class="btn btn-ghost" onclick="prevStep()">← Voltar</button>
+        <span class="step-counter" id="sc10"></span>
+        <button type="button" class="btn btn-primary" onclick="nextStep()">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         STEP 11 — Observações finais
+    ════════════════════════════════════ -->
+    <div class="step" data-step="11">
+      <div class="step-label" id="lbl11"></div>
+      <div class="step-title">Mais alguma coisa?</div>
+      <div class="step-desc">Se houver algo importante que não foi perguntado, esse é o momento.</div>
+
+      <div class="field">
+        <label class="field-label">Observações adicionais <span class="hint">Opcional</span></label>
+        <textarea name="Observações" id="obsTextarea" placeholder=""></textarea>
+      </div>
+
+      <div class="nav">
+        <button type="button" class="btn btn-ghost" onclick="prevStep()">← Voltar</button>
+        <span class="step-counter" id="sc11"></span>
+        <button type="button" class="btn btn-primary" onclick="submitForm()">Enviar →</button>
+      </div>
+    </div>
+
+  </form>
+
+  <div class="success-screen" id="successScreen">
+    <div class="success-icon">✓</div>
+    <h2>Formulário enviado!</h2>
+    <p>Recebi todas as informações.<br>Vou analisar e entro em contato em breve para darmos o próximo passo.</p>
+  </div>
+</div>
+
+<script>
+  var currentStep = 0;
+  var servico = null;
+  var perfil = null;
+
+  function isAds() { return servico && servico.indexOf('Tráfego') !== -1; }
+  function isOrg() { return servico && servico.indexOf('Orgânico') !== -1; }
+  function isLib() { return perfil === 'Profissional Liberal'; }
+  function isEmp() { return perfil === 'Empresa / Comércio'; }
+
+  function getSequence() {
+    var seq = [0, 1];
+    // Dados de contato: step 2 = liberal, step 3 = empresa
+    if (isLib()) seq.push(2); else seq.push(3);
+    // Ads: perguntas específicas por perfil + diferenciais/concorrência
+    if (isAds() && isLib()) seq.push(4);
+    if (isAds() && isEmp()) seq.push(5);
+    if (isAds()) seq.push(6);
+    // Orgânico: perguntas específicas por perfil + produção
+    if (isOrg() && isLib()) seq.push(7);
+    if (isOrg() && isEmp()) seq.push(8);
+    if (isOrg()) seq.push(9);
+    // Convergência final
+    seq.push(10, 11);
+    return seq;
+  }
+
+  function pickService(el) {
+    document.querySelectorAll('.service-card').forEach(function(c){ c.classList.remove('selected'); });
+    el.classList.add('selected');
+    servico = el.dataset.value;
+    document.getElementById('hServico').value = servico;
+  }
+
+  function pickProfile(el) {
+    document.querySelectorAll('.profile-card').forEach(function(c){ c.classList.remove('selected'); });
+    el.classList.add('selected');
+    perfil = el.dataset.value;
+    document.getElementById('hPerfil').value = perfil;
+  }
+
+  function selectRadio(el, groupId, fieldName, hasOutro) {
+    document.getElementById(groupId).querySelectorAll('.radio-item').forEach(function(i){ i.classList.remove('selected'); });
+    el.classList.add('selected');
+    el.querySelector('input').checked = true;
+    var outroKey = groupId.replace('rg-','');
+    var outroEl = document.getElementById('outro-' + outroKey);
+    if (outroEl) {
+      outroEl.classList.toggle('visible', !!hasOutro);
+      if (!hasOutro) {
+        var txt = outroEl.querySelector('input[type=text]');
+        if (txt) txt.value = '';
+      }
+    }
+    el.closest('.field').classList.remove('has-error');
+  }
+
+  function selectCheck(el, groupId, maxSelect, hasOutro) {
+    if (!maxSelect) maxSelect = 99;
+    var group = document.getElementById(groupId);
+    var wasSelected = el.classList.contains('selected');
+    if (!wasSelected && group.querySelectorAll('.check-item.selected').length >= maxSelect) return;
+    el.classList.toggle('selected');
+    el.querySelector('input').checked = !wasSelected;
+    if (hasOutro) {
+      var outroKey = groupId.replace('cg-','');
+      var outroEl = document.getElementById('outro-' + outroKey);
+      if (outroEl) {
+        var isNowSelected = el.classList.contains('selected');
+        outroEl.classList.toggle('visible', isNowSelected);
+        if (!isNowSelected) {
+          var txt = outroEl.querySelector('input[type=text]');
+          if (txt) txt.value = '';
+        }
+      }
+    }
+    el.closest('.field').classList.remove('has-error');
+  }
+
+  function updateUI() {
+    var seq = getSequence();
+    var pos = seq.indexOf(currentStep);
+    var total = seq.length;
+    var pct = total > 1 ? (pos / (total - 1)) * 100 : 0;
+    document.getElementById('progressFill').style.width = Math.max(4, pct) + '%';
+    var label = 'Passo ' + (pos + 1) + ' de ' + total;
+    for (var i = 0; i <= 11; i++) {
+      var el = document.getElementById('sc' + i) || document.getElementById('lbl' + i);
+      if (document.getElementById('sc' + i)) document.getElementById('sc' + i).textContent = (pos + 1) + ' de ' + total;
+      if (document.getElementById('lbl' + i)) document.getElementById('lbl' + i).textContent = label;
+    }
+    var contasField = document.getElementById('f-contas-ads');
+    if (contasField) contasField.style.display = isAds() ? '' : 'none';
+
+    var obs = document.getElementById('obsTextarea');
+    if (obs) {
+      if (isAds() && !isOrg()) {
+        obs.placeholder = 'Ex: já tenho campanha rodando, prefiro não anunciar aos fins de semana, tenho sazonalidade em novembro...';
+      } else if (isOrg() && !isAds()) {
+        obs.placeholder = 'Ex: já postei alguns conteúdos antes, prefiro evitar certos formatos, tenho períodos com menos disponibilidade para gravar...';
+      } else {
+        obs.placeholder = 'Ex: já tenho campanha rodando, prefiro não anunciar em certos períodos, tenho menos disponibilidade para gravar em alguns meses...';
+      }
+    }
+  }
+
+  function showStep(n) {
+    document.querySelectorAll('.step').forEach(function(s){ s.classList.remove('active'); });
+    var target = document.querySelector('[data-step="' + n + '"]');
+    if (target) target.classList.add('active');
+    updateUI();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function validate() {
+    if (currentStep === 0 && !servico) { alert('Selecione um serviço para continuar.'); return false; }
+    if (currentStep === 1 && !perfil) { alert('Selecione seu perfil para continuar.'); return false; }
+
+    var stepEl = document.querySelector('.step.active');
+    var ok = true;
+
+    stepEl.querySelectorAll('.field').forEach(function(field) {
+      if (field.style.display === 'none') return;
+      if (!field.querySelector('.req')) return;
+
+      // Só valida inputs de texto que NÃO estão dentro de .outro-wrap oculto
+      var inputs = field.querySelectorAll('input[type=text], input[type=email], input[type=tel], input[type=url], textarea');
+      var textEmpty = false;
+      inputs.forEach(function(inp) {
+        var hiddenWrap = inp.closest('.outro-wrap');
+        if (hiddenWrap && !hiddenWrap.classList.contains('visible')) return; // ignora inputs em outro-wrap oculto
+        if (!inp.value.trim()) textEmpty = true;
+      });
+      if (textEmpty) { field.classList.add('has-error'); ok = false; return; }
+
+      var rg = field.querySelector('.radio-group');
+      if (rg && !rg.querySelector('input[type=radio]:checked')) { field.classList.add('has-error'); ok = false; return; }
+
+      var cg = field.querySelector('.checkbox-group');
+      if (cg && !cg.querySelector('input[type=checkbox]:checked')) { field.classList.add('has-error'); ok = false; return; }
+    });
+
+    return ok;
+  }
+
+  function nextStep() {
+    if (!validate()) return;
+    var seq = getSequence();
+    var pos = seq.indexOf(currentStep);
+    if (pos < seq.length - 1) { currentStep = seq[pos + 1]; showStep(currentStep); }
+  }
+
+  function prevStep() {
+    var seq = getSequence();
+    var pos = seq.indexOf(currentStep);
+    if (pos > 0) { currentStep = seq[pos - 1]; showStep(currentStep); }
+  }
+
+  function submitForm() {
+    if (!validate()) return;
+    var form = document.getElementById('mainForm');
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(function(res) {
+      if (res.ok) {
+        form.style.display = 'none';
+        document.getElementById('successScreen').style.display = 'block';
+        document.getElementById('progressFill').style.width = '100%';
+      } else { alert('Ops, algo deu errado. Tente novamente.'); }
+    }).catch(function() { alert('Erro de conexão. Verifique sua internet e tente novamente.'); });
+  }
+
+  updateUI();
+</script>
+</body>
+</html>
