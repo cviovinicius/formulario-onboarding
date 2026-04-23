@@ -767,7 +767,13 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
     el.querySelector('input').checked = true;
     var outroKey = groupId.replace('rg-','');
     var outroEl = document.getElementById('outro-' + outroKey);
-    if (outroEl) outroEl.classList.toggle('visible', !!hasOutro);
+    if (outroEl) {
+      outroEl.classList.toggle('visible', !!hasOutro);
+      if (!hasOutro) {
+        var txt = outroEl.querySelector('input[type=text]');
+        if (txt) txt.value = '';
+      }
+    }
     el.closest('.field').classList.remove('has-error');
   }
 
@@ -781,7 +787,14 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
     if (hasOutro) {
       var outroKey = groupId.replace('cg-','');
       var outroEl = document.getElementById('outro-' + outroKey);
-      if (outroEl) outroEl.classList.toggle('visible', el.classList.contains('selected'));
+      if (outroEl) {
+        var isNowSelected = el.classList.contains('selected');
+        outroEl.classList.toggle('visible', isNowSelected);
+        if (!isNowSelected) {
+          var txt = outroEl.querySelector('input[type=text]');
+          if (txt) txt.value = '';
+        }
+      }
     }
     el.closest('.field').classList.remove('has-error');
   }
@@ -832,8 +845,15 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
       if (field.style.display === 'none') return;
       if (!field.querySelector('.req')) return;
 
-      var input = field.querySelector('input[type=text], input[type=email], input[type=tel], input[type=url], textarea');
-      if (input && !input.value.trim()) { field.classList.add('has-error'); ok = false; return; }
+      // Só valida inputs de texto que NÃO estão dentro de .outro-wrap oculto
+      var inputs = field.querySelectorAll('input[type=text], input[type=email], input[type=tel], input[type=url], textarea');
+      var textEmpty = false;
+      inputs.forEach(function(inp) {
+        var hiddenWrap = inp.closest('.outro-wrap');
+        if (hiddenWrap && !hiddenWrap.classList.contains('visible')) return; // ignora inputs em outro-wrap oculto
+        if (!inp.value.trim()) textEmpty = true;
+      });
+      if (textEmpty) { field.classList.add('has-error'); ok = false; return; }
 
       var rg = field.querySelector('.radio-group');
       if (rg && !rg.querySelector('input[type=radio]:checked')) { field.classList.add('has-error'); ok = false; return; }
