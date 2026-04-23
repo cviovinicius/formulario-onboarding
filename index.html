@@ -864,10 +864,47 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
   function submitForm() {
     if (!validate()) return;
     var form = document.getElementById('mainForm');
-    var fd = new FormData(form);
 
-    // Debug: logar tudo que vai ser enviado
-    console.log('=== Dados a enviar ===');
+    // Monta FormData só com campos que pertencem ao caminho escolhido
+    var fd = new FormData();
+
+    // Hidden fields sempre vão
+    fd.append('_subject', 'Novo onboarding recebido');
+    fd.append('servico_contratado', servico);
+    fd.append('perfil_cliente', perfil);
+
+    // Percorre apenas os steps que fazem parte da sequência do usuário
+    var seq = getSequence();
+    seq.forEach(function(stepNum) {
+      var stepEl = document.querySelector('[data-step="' + stepNum + '"]');
+      if (!stepEl) return;
+
+      stepEl.querySelectorAll('input, textarea, select').forEach(function(inp) {
+        if (inp.type === 'hidden') return; // já adicionados acima
+        if (!inp.name) return;
+
+        // Ignora inputs dentro de outro-wrap oculto
+        var hiddenWrap = inp.closest('.outro-wrap');
+        if (hiddenWrap && !hiddenWrap.classList.contains('visible')) return;
+
+        // Ignora field inteiro oculto (como f-contas-ads quando é só orgânico)
+        var field = inp.closest('.field');
+        if (field && field.style.display === 'none') return;
+
+        if (inp.type === 'checkbox') {
+          if (inp.checked) fd.append(inp.name, inp.value);
+        } else if (inp.type === 'radio') {
+          if (inp.checked) fd.append(inp.name, inp.value);
+        } else {
+          // text, email, tel, url, textarea — só envia se tiver valor
+          var val = (inp.value || '').trim();
+          if (val) fd.append(inp.name, val);
+        }
+      });
+    });
+
+    // Debug
+    console.log('=== Dados a enviar (filtrados) ===');
     for (var pair of fd.entries()) {
       console.log(pair[0] + ' = ' + pair[1]);
     }
@@ -885,7 +922,7 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
           document.getElementById('successScreen').style.display = 'block';
           document.getElementById('progressFill').style.width = '100%';
         } else {
-          alert('Erro: ' + (data.error || data.errors && JSON.stringify(data.errors) || 'desconhecido'));
+          alert('Erro: ' + (data.error || (data.errors && JSON.stringify(data.errors)) || 'desconhecido'));
         }
       });
     }).catch(function(e) {
