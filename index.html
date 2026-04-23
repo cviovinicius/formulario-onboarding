@@ -353,30 +353,10 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
 
       <div class="field" id="f-servicos-emp">
         <label class="field-label">Quais serviços vocês querem priorizar neste primeiro momento? <span class="req">*</span>
-          <span class="hint">Escolha até 3</span>
+          <span class="hint">Liste os serviços ou produtos mais importantes para anunciar agora</span>
         </label>
-        <div class="checkbox-group" id="cg-servicos-emp">
-          <div class="check-item" onclick="selectCheck(this,'cg-servicos-emp',3)">
-            <input type="checkbox" name="Serviços prioritários" value="Produto ou serviço principal 1">
-            <div class="check-box"></div>Produto ou serviço principal 1
-          </div>
-          <div class="check-item" onclick="selectCheck(this,'cg-servicos-emp',3)">
-            <input type="checkbox" name="Serviços prioritários" value="Produto ou serviço principal 2">
-            <div class="check-box"></div>Produto ou serviço principal 2
-          </div>
-          <div class="check-item" onclick="selectCheck(this,'cg-servicos-emp',3)">
-            <input type="checkbox" name="Serviços prioritários" value="Produto ou serviço principal 3">
-            <div class="check-box"></div>Produto ou serviço principal 3
-          </div>
-          <div class="check-item" onclick="selectCheck(this,'cg-servicos-emp',3,true)">
-            <input type="checkbox" name="Serviços prioritários" value="Outro">
-            <div class="check-box"></div>Outro
-          </div>
-        </div>
-        <div class="outro-wrap" id="outro-servicos-emp">
-          <input type="text" name="Serviços prioritários (outro)" placeholder="Descreva seus serviços...">
-        </div>
-        <div class="error-msg">Selecione ao menos uma opção.</div>
+        <textarea name="Serviços prioritários" placeholder="Ex: implantação de ERP, consultoria em automação, manutenção de servidores..."></textarea>
+        <div class="error-msg">Campo obrigatório.</div>
       </div>
       <div class="field" id="f-clientes-emp">
         <label class="field-label">Quais tipos de clientes vocês atendem principalmente? <span class="req">*</span></label>
@@ -841,6 +821,9 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
     var stepEl = document.querySelector('.step.active');
     var ok = true;
 
+    // Reset: limpa erros anteriores antes de revalidar
+    stepEl.querySelectorAll('.field.has-error').forEach(function(f) { f.classList.remove('has-error'); });
+
     stepEl.querySelectorAll('.field').forEach(function(field) {
       if (field.style.display === 'none') return;
       if (!field.querySelector('.req')) return;
@@ -893,6 +876,15 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
       } else { alert('Ops, algo deu errado. Tente novamente.'); }
     }).catch(function() { alert('Erro de conexão. Verifique sua internet e tente novamente.'); });
   }
+
+  // Remove has-error quando usuário começa a digitar (feedback imediato)
+  document.addEventListener('input', function(e) {
+    var t = e.target;
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA')) {
+      var field = t.closest('.field');
+      if (field) field.classList.remove('has-error');
+    }
+  });
 
   updateUI();
 </script>
