@@ -103,8 +103,8 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
 
   <form id="mainForm" action="https://formspree.io/f/xgoppzdp" method="POST">
     <input type="hidden" name="_subject" value="Novo onboarding recebido">
-    <input type="hidden" name="Serviço contratado" id="hServico">
-    <input type="hidden" name="Perfil do cliente" id="hPerfil">
+    <input type="hidden" name="servico_contratado" id="hServico">
+    <input type="hidden" name="perfil_cliente" id="hPerfil">
 
     <!-- ═══════════════════════════════════
          STEP 0 — Escolha do serviço
@@ -172,36 +172,36 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
 
       <div class="field" id="f-nome-lib">
         <label class="field-label">Seu nome completo <span class="req">*</span></label>
-        <input type="text" name="Nome" placeholder="Ex: Dra. Ana Lima">
+        <input type="text" name="nome" placeholder="Ex: Dra. Ana Lima">
         <div class="error-msg">Campo obrigatório.</div>
       </div>
       <div class="field" id="f-especialidade">
         <label class="field-label">Sua especialidade ou área de atuação <span class="req">*</span>
           <span class="hint">Ex: psiquiatria, nutrição esportiva, direito à saúde, fisioterapia pélvica</span>
         </label>
-        <input type="text" name="Especialidade" placeholder="Ex: psicologia clínica — ansiedade e depressão">
+        <input type="text" name="especialidade" placeholder="Ex: psicologia clínica — ansiedade e depressão">
         <div class="error-msg">Campo obrigatório.</div>
       </div>
       <div class="field" id="f-instagram-lib">
         <label class="field-label">Instagram <span class="req">*</span></label>
-        <input type="text" name="Instagram" placeholder="@seuperfil">
+        <input type="text" name="instagram" placeholder="@seuperfil">
         <div class="error-msg">Campo obrigatório.</div>
       </div>
       <div class="field" id="f-whatsapp-lib">
         <label class="field-label">WhatsApp de contato <span class="req">*</span></label>
-        <input type="tel" name="WhatsApp" placeholder="(11) 99999-9999">
+        <input type="tel" name="whatsapp" placeholder="(11) 99999-9999">
         <div class="error-msg">Campo obrigatório.</div>
       </div>
       <div class="field" id="f-email-lib">
         <label class="field-label">Email <span class="req">*</span></label>
-        <input type="email" name="Email" placeholder="voce@email.com">
+        <input type="email" name="email" placeholder="voce@email.com">
         <div class="error-msg">Campo obrigatório.</div>
       </div>
       <div class="field">
         <label class="field-label">Site ou link de agendamento
           <span class="hint">Opcional</span>
         </label>
-        <input type="url" name="Site" placeholder="https://...">
+        <input type="url" name="site" placeholder="https://...">
       </div>
 
       <div class="nav">
@@ -221,34 +221,34 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
 
       <div class="field" id="f-nome-emp">
         <label class="field-label">Nome da empresa <span class="req">*</span></label>
-        <input type="text" name="Nome da empresa" placeholder="Ex: Studio Bela Forma">
+        <input type="text" name="nome_empresa" placeholder="Ex: Studio Bela Forma">
         <div class="error-msg">Campo obrigatório.</div>
       </div>
       <div class="field" id="f-site-emp">
         <label class="field-label">Site <span class="req">*</span></label>
-        <input type="url" name="Site" placeholder="https://www.suaempresa.com.br">
+        <input type="url" name="site" placeholder="https://www.suaempresa.com.br">
         <div class="error-msg">Campo obrigatório.</div>
       </div>
       <div class="field" id="f-regioes">
         <label class="field-label">Quais regiões vocês atendem? <span class="req">*</span>
           <span class="hint">Ex: cidade, estado, todo o Brasil</span>
         </label>
-        <input type="text" name="Regiões atendidas" placeholder="Ex: Grande São Paulo e interior">
+        <input type="text" name="regioes_atendidas" placeholder="Ex: Grande São Paulo e interior">
         <div class="error-msg">Campo obrigatório.</div>
       </div>
       <div class="field" id="f-instagram-emp">
         <label class="field-label">Instagram <span class="req">*</span></label>
-        <input type="text" name="Instagram" placeholder="@suaempresa">
+        <input type="text" name="instagram" placeholder="@suaempresa">
         <div class="error-msg">Campo obrigatório.</div>
       </div>
       <div class="field" id="f-whatsapp-emp">
         <label class="field-label">WhatsApp comercial <span class="req">*</span></label>
-        <input type="tel" name="WhatsApp" placeholder="(11) 99999-9999">
+        <input type="tel" name="whatsapp" placeholder="(11) 99999-9999">
         <div class="error-msg">Campo obrigatório.</div>
       </div>
       <div class="field" id="f-email-emp">
         <label class="field-label">Email comercial <span class="req">*</span></label>
-        <input type="email" name="Email" placeholder="contato@empresa.com.br">
+        <input type="email" name="email" placeholder="contato@empresa.com.br">
         <div class="error-msg">Campo obrigatório.</div>
       </div>
 
@@ -271,42 +271,42 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
         <label class="field-label">Quais serviços você presta hoje? <span class="req">*</span>
           <span class="hint">Liste todos — consultas, programas, acompanhamentos, grupos, etc.</span>
         </label>
-        <textarea name="Serviços prestados" placeholder="Ex: consultas individuais, grupos terapêuticos, orientação de pais..."></textarea>
+        <textarea name="servicos_prestados" placeholder="Ex: consultas individuais, grupos terapêuticos, orientação de pais..."></textarea>
         <div class="error-msg">Campo obrigatório.</div>
       </div>
       <div class="field" id="f-prio-lib">
         <label class="field-label">Quais são PRIORITÁRIOS neste momento? <span class="req">*</span>
           <span class="hint">O que você quer atrair com mais frequência agora?</span>
         </label>
-        <textarea name="Serviços prioritários" placeholder="Ex: consultas particulares de avaliação inicial e acompanhamento mensal..."></textarea>
+        <textarea name="servicos_prioritarios" placeholder="Ex: consultas particulares de avaliação inicial e acompanhamento mensal..."></textarea>
         <div class="error-msg">Campo obrigatório.</div>
       </div>
       <div class="field" id="f-quem-lib">
         <label class="field-label">Quem normalmente entra em contato para esse tipo de serviço? <span class="req">*</span></label>
         <div class="checkbox-group" id="cg-quem">
           <div class="check-item" onclick="selectCheck(this,'cg-quem')">
-            <input type="checkbox" name="Quem entra em contato" value="O próprio paciente/cliente">
+            <input type="checkbox" name="quem_entra_contato" value="O próprio paciente/cliente">
             <div class="check-box"></div>O próprio paciente/cliente
           </div>
           <div class="check-item" onclick="selectCheck(this,'cg-quem')">
-            <input type="checkbox" name="Quem entra em contato" value="Familiar ou responsável">
+            <input type="checkbox" name="quem_entra_contato" value="Familiar ou responsável">
             <div class="check-box"></div>Familiar ou responsável
           </div>
           <div class="check-item" onclick="selectCheck(this,'cg-quem')">
-            <input type="checkbox" name="Quem entra em contato" value="Médico ou profissional que indica">
+            <input type="checkbox" name="quem_entra_contato" value="Médico ou profissional que indica">
             <div class="check-box"></div>Médico ou profissional que indica
           </div>
           <div class="check-item" onclick="selectCheck(this,'cg-quem')">
-            <input type="checkbox" name="Quem entra em contato" value="Empresa (plano de saúde, RH)">
+            <input type="checkbox" name="quem_entra_contato" value="Empresa (plano de saúde, RH)">
             <div class="check-box"></div>Empresa (plano de saúde, RH)
           </div>
           <div class="check-item" onclick="selectCheck(this,'cg-quem',99,true)">
-            <input type="checkbox" name="Quem entra em contato" value="Outro">
+            <input type="checkbox" name="quem_entra_contato" value="Outro">
             <div class="check-box"></div>Outro
           </div>
         </div>
         <div class="outro-wrap" id="outro-quem">
-          <input type="text" name="Quem entra em contato (outro)" placeholder="Descreva...">
+          <input type="text" name="quem_entra_contato_outro" placeholder="Descreva...">
         </div>
         <div class="error-msg">Selecione ao menos uma opção.</div>
       </div>
@@ -314,22 +314,22 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
         <label class="field-label">Como você descreveria o perfil ideal de cliente para você hoje? <span class="req">*</span>
           <span class="hint">Ex: urgência do caso, capacidade de decisão, ticket esperado, faixa etária</span>
         </label>
-        <textarea name="Perfil ideal de cliente" placeholder="Ex: adultos 30-50 anos, buscam resultado rápido, pagam particular, já tentaram outras abordagens..."></textarea>
+        <textarea name="perfil_ideal" placeholder="Ex: adultos 30-50 anos, buscam resultado rápido, pagam particular, já tentaram outras abordagens..."></textarea>
         <div class="error-msg">Campo obrigatório.</div>
       </div>
       <div class="field" id="f-online-lib">
         <label class="field-label">Você atende de forma 100% online? <span class="req">*</span></label>
         <div class="radio-group" id="rg-online">
           <div class="radio-item" onclick="selectRadio(this,'rg-online','Modalidade de atendimento')">
-            <input type="radio" name="Modalidade de atendimento" value="Sim, 100% online">
+            <input type="radio" name="modalidade_atendimento" value="Sim, 100% online">
             <div class="radio-dot"></div>Sim, 100% online
           </div>
           <div class="radio-item" onclick="selectRadio(this,'rg-online','Modalidade de atendimento')">
-            <input type="radio" name="Modalidade de atendimento" value="Não, somente presencial">
+            <input type="radio" name="modalidade_atendimento" value="Não, somente presencial">
             <div class="radio-dot"></div>Não, somente presencial
           </div>
           <div class="radio-item" onclick="selectRadio(this,'rg-online','Modalidade de atendimento')">
-            <input type="radio" name="Modalidade de atendimento" value="Híbrido — online e presencial">
+            <input type="radio" name="modalidade_atendimento" value="Híbrido — online e presencial">
             <div class="radio-dot"></div>Híbrido — online e presencial
           </div>
         </div>
@@ -355,65 +355,65 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
         <label class="field-label">Quais serviços vocês querem priorizar neste primeiro momento? <span class="req">*</span>
           <span class="hint">Liste os serviços ou produtos mais importantes para anunciar agora</span>
         </label>
-        <textarea name="Serviços prioritários" placeholder="Ex: implantação de ERP, consultoria em automação, manutenção de servidores..."></textarea>
+        <textarea name="servicos_prioritarios" placeholder="Ex: implantação de ERP, consultoria em automação, manutenção de servidores..."></textarea>
         <div class="error-msg">Campo obrigatório.</div>
       </div>
       <div class="field" id="f-clientes-emp">
         <label class="field-label">Quais tipos de clientes vocês atendem principalmente? <span class="req">*</span></label>
         <div class="checkbox-group" id="cg-clientes-emp">
           <div class="check-item" onclick="selectCheck(this,'cg-clientes-emp')">
-            <input type="checkbox" name="Tipos de clientes" value="Pessoa física (consumidor final)">
+            <input type="checkbox" name="tipos_clientes" value="Pessoa física (consumidor final)">
             <div class="check-box"></div>Pessoa física (consumidor final)
           </div>
           <div class="check-item" onclick="selectCheck(this,'cg-clientes-emp')">
-            <input type="checkbox" name="Tipos de clientes" value="Pequenas e médias empresas">
+            <input type="checkbox" name="tipos_clientes" value="Pequenas e médias empresas">
             <div class="check-box"></div>Pequenas e médias empresas
           </div>
           <div class="check-item" onclick="selectCheck(this,'cg-clientes-emp')">
-            <input type="checkbox" name="Tipos de clientes" value="Grandes empresas">
+            <input type="checkbox" name="tipos_clientes" value="Grandes empresas">
             <div class="check-box"></div>Grandes empresas
           </div>
           <div class="check-item" onclick="selectCheck(this,'cg-clientes-emp')">
-            <input type="checkbox" name="Tipos de clientes" value="Profissionais liberais">
+            <input type="checkbox" name="tipos_clientes" value="Profissionais liberais">
             <div class="check-box"></div>Profissionais liberais
           </div>
           <div class="check-item" onclick="selectCheck(this,'cg-clientes-emp',99,true)">
-            <input type="checkbox" name="Tipos de clientes" value="Outro">
+            <input type="checkbox" name="tipos_clientes" value="Outro">
             <div class="check-box"></div>Outro
           </div>
         </div>
         <div class="outro-wrap" id="outro-clientes-emp">
-          <input type="text" name="Tipos de clientes (outro)" placeholder="Descreva...">
+          <input type="text" name="tipos_clientes_outro" placeholder="Descreva...">
         </div>
         <div class="error-msg">Selecione ao menos uma opção.</div>
       </div>
       <div class="field" id="f-resp-emp">
         <label class="field-label">Quem vai responder os leads das campanhas? <span class="req">*</span></label>
-        <input type="text" name="Responsável pelos leads" placeholder="Ex: equipe comercial, secretária, eu mesmo...">
+        <input type="text" name="responsavel_leads" placeholder="Ex: equipe comercial, secretária, eu mesmo...">
         <div class="error-msg">Campo obrigatório.</div>
       </div>
       <div class="field" id="f-destino-emp">
         <label class="field-label">Para onde os leads devem ser direcionados? <span class="req">*</span></label>
         <div class="radio-group" id="rg-destino-emp">
           <div class="radio-item" onclick="selectRadio(this,'rg-destino-emp','Destino dos leads')">
-            <input type="radio" name="Destino dos leads" value="WhatsApp">
+            <input type="radio" name="destino_leads" value="WhatsApp">
             <div class="radio-dot"></div>WhatsApp
           </div>
           <div class="radio-item" onclick="selectRadio(this,'rg-destino-emp','Destino dos leads')">
-            <input type="radio" name="Destino dos leads" value="Formulário no site">
+            <input type="radio" name="destino_leads" value="Formulário no site">
             <div class="radio-dot"></div>Formulário no site
           </div>
           <div class="radio-item" onclick="selectRadio(this,'rg-destino-emp','Destino dos leads')">
-            <input type="radio" name="Destino dos leads" value="Ligação telefônica">
+            <input type="radio" name="destino_leads" value="Ligação telefônica">
             <div class="radio-dot"></div>Ligação telefônica
           </div>
           <div class="radio-item" onclick="selectRadio(this,'rg-destino-emp','Destino dos leads',true)">
-            <input type="radio" name="Destino dos leads" value="Outro">
+            <input type="radio" name="destino_leads" value="Outro">
             <div class="radio-dot"></div>Outro
           </div>
         </div>
         <div class="outro-wrap" id="outro-destino-emp">
-          <input type="text" name="Destino dos leads (outro)" placeholder="Descreva...">
+          <input type="text" name="destino_leads_outro" placeholder="Descreva...">
         </div>
         <div class="error-msg">Selecione uma opção.</div>
       </div>
@@ -437,14 +437,14 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
         <label class="field-label">Por que um cliente deveria te escolher? <span class="req">*</span>
           <span class="hint">Ex: experiência, método próprio, resultado comprovado, atendimento humanizado</span>
         </label>
-        <textarea name="Diferenciais" placeholder="Descreva o que te torna a melhor escolha..."></textarea>
+        <textarea name="diferenciais" placeholder="Descreva o que te torna a melhor escolha..."></textarea>
         <div class="error-msg">Campo obrigatório.</div>
       </div>
       <div class="field" id="f-conc">
         <label class="field-label">Quem você considera concorrentes diretos? <span class="req">*</span>
           <span class="hint">Nomes, perfis ou sites — quanto mais específico, melhor</span>
         </label>
-        <textarea name="Concorrentes" placeholder="Ex: Clínica X, Dr. Fulano (@perfil), www.site.com.br..."></textarea>
+        <textarea name="concorrentes" placeholder="Ex: Clínica X, Dr. Fulano (@perfil), www.site.com.br..."></textarea>
         <div class="error-msg">Campo obrigatório.</div>
       </div>
 
@@ -467,14 +467,14 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
         <label class="field-label">Qual será o foco principal do seu conteúdo? <span class="req">*</span>
           <span class="hint">Ex: saúde mental no trabalho, nutrição para atletas amadores, direito do paciente</span>
         </label>
-        <textarea name="Foco do conteúdo" placeholder="Descreva o tema central que você quer trabalhar no Instagram..."></textarea>
+        <textarea name="foco_conteudo" placeholder="Descreva o tema central que você quer trabalhar no Instagram..."></textarea>
         <div class="error-msg">Campo obrigatório.</div>
       </div>
       <div class="field" id="f-publico-lib">
         <label class="field-label">Como você descreveria o público que deseja atingir? <span class="req">*</span>
           <span class="hint">Ex: perfil, faixa etária, principais dores, contexto de vida</span>
         </label>
-        <textarea name="Público-alvo" placeholder="Ex: mulheres 30-45 anos que sofrem com ansiedade e buscam uma abordagem sem julgamentos..."></textarea>
+        <textarea name="publico_alvo" placeholder="Ex: mulheres 30-45 anos que sofrem com ansiedade e buscam uma abordagem sem julgamentos..."></textarea>
         <div class="error-msg">Campo obrigatório.</div>
       </div>
 
@@ -497,14 +497,14 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
         <label class="field-label">Qual será o foco principal do conteúdo? <span class="req">*</span>
           <span class="hint">Ex: educação financeira, bastidores do negócio, dicas do setor</span>
         </label>
-        <textarea name="Foco do conteúdo" placeholder="Descreva o tema central que vocês querem trabalhar no Instagram..."></textarea>
+        <textarea name="foco_conteudo" placeholder="Descreva o tema central que vocês querem trabalhar no Instagram..."></textarea>
         <div class="error-msg">Campo obrigatório.</div>
       </div>
       <div class="field" id="f-publico-emp-org">
         <label class="field-label">Como você descreveria o público que deseja atingir? <span class="req">*</span>
           <span class="hint">Ex: perfil, faixa etária, principais dores, contexto</span>
         </label>
-        <textarea name="Público-alvo" placeholder="Ex: empresários de pequenos negócios que querem profissionalizar a operação..."></textarea>
+        <textarea name="publico_alvo" placeholder="Ex: empresários de pequenos negócios que querem profissionalizar a operação..."></textarea>
         <div class="error-msg">Campo obrigatório.</div>
       </div>
       <div class="field" id="f-tom-emp">
@@ -513,28 +513,28 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
         </label>
         <div class="checkbox-group" id="cg-tom">
           <div class="check-item" onclick="selectCheck(this,'cg-tom',2)">
-            <input type="checkbox" name="Tom de voz" value="Autoridade e expertise">
+            <input type="checkbox" name="tom_de_voz" value="Autoridade e expertise">
             <div class="check-box"></div>Autoridade e expertise
           </div>
           <div class="check-item" onclick="selectCheck(this,'cg-tom',2)">
-            <input type="checkbox" name="Tom de voz" value="Próximo e acolhedor">
+            <input type="checkbox" name="tom_de_voz" value="Próximo e acolhedor">
             <div class="check-box"></div>Próximo e acolhedor
           </div>
           <div class="check-item" onclick="selectCheck(this,'cg-tom',2)">
-            <input type="checkbox" name="Tom de voz" value="Educativo e didático">
+            <input type="checkbox" name="tom_de_voz" value="Educativo e didático">
             <div class="check-box"></div>Educativo e didático
           </div>
           <div class="check-item" onclick="selectCheck(this,'cg-tom',2)">
-            <input type="checkbox" name="Tom de voz" value="Descontraído e bem-humorado">
+            <input type="checkbox" name="tom_de_voz" value="Descontraído e bem-humorado">
             <div class="check-box"></div>Descontraído e bem-humorado
           </div>
           <div class="check-item" onclick="selectCheck(this,'cg-tom',2,true)">
-            <input type="checkbox" name="Tom de voz" value="Outro">
+            <input type="checkbox" name="tom_de_voz" value="Outro">
             <div class="check-box"></div>Outro
           </div>
         </div>
         <div class="outro-wrap" id="outro-tom">
-          <input type="text" name="Tom de voz (outro)" placeholder="Descreva...">
+          <input type="text" name="tom_de_voz_outro" placeholder="Descreva...">
         </div>
         <div class="error-msg">Selecione ao menos uma opção.</div>
       </div>
@@ -560,19 +560,19 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
         </label>
         <div class="radio-group" id="rg-freq">
           <div class="radio-item" onclick="selectRadio(this,'rg-freq','Frequência de produção')">
-            <input type="radio" name="Frequência de produção" value="1 a 2 vezes por semana">
+            <input type="radio" name="frequencia_producao" value="1 a 2 vezes por semana">
             <div class="radio-dot"></div>1 a 2 vezes por semana
           </div>
           <div class="radio-item" onclick="selectRadio(this,'rg-freq','Frequência de produção')">
-            <input type="radio" name="Frequência de produção" value="3 a 4 vezes por semana">
+            <input type="radio" name="frequencia_producao" value="3 a 4 vezes por semana">
             <div class="radio-dot"></div>3 a 4 vezes por semana
           </div>
           <div class="radio-item" onclick="selectRadio(this,'rg-freq','Frequência de produção')">
-            <input type="radio" name="Frequência de produção" value="Praticamente todo dia">
+            <input type="radio" name="frequencia_producao" value="Praticamente todo dia">
             <div class="radio-dot"></div>Praticamente todo dia
           </div>
           <div class="radio-item" onclick="selectRadio(this,'rg-freq','Frequência de produção')">
-            <input type="radio" name="Frequência de produção" value="Ainda não sei — preciso de orientação">
+            <input type="radio" name="frequencia_producao" value="Ainda não sei — preciso de orientação">
             <div class="radio-dot"></div>Ainda não sei — preciso de orientação
           </div>
         </div>
@@ -582,21 +582,21 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
         <label class="field-label">Existe algum tema que você prefere evitar no conteúdo?
           <span class="hint">Opcional</span>
         </label>
-        <textarea name="Temas a evitar" placeholder="Ex: política, comparações com concorrentes, temas muito técnicos sem tradução..."></textarea>
+        <textarea name="temas_evitar" placeholder="Ex: política, comparações com concorrentes, temas muito técnicos sem tradução..."></textarea>
       </div>
       <div class="field" id="f-ig-status">
         <label class="field-label">Como está o seu Instagram hoje? <span class="req">*</span></label>
         <div class="radio-group" id="rg-ig-status">
           <div class="radio-item" onclick="selectRadio(this,'rg-ig-status','Status do Instagram')">
-            <input type="radio" name="Status do Instagram" value="Ativo e já publico com frequência">
+            <input type="radio" name="status_instagram" value="Ativo e já publico com frequência">
             <div class="radio-dot"></div>Ativo e já publico com frequência
           </div>
           <div class="radio-item" onclick="selectRadio(this,'rg-ig-status','Status do Instagram')">
-            <input type="radio" name="Status do Instagram" value="Existe mas está parado há um tempo">
+            <input type="radio" name="status_instagram" value="Existe mas está parado há um tempo">
             <div class="radio-dot"></div>Existe mas está parado há um tempo
           </div>
           <div class="radio-item" onclick="selectRadio(this,'rg-ig-status','Status do Instagram')">
-            <input type="radio" name="Status do Instagram" value="Estou começando do zero">
+            <input type="radio" name="status_instagram" value="Estou começando do zero">
             <div class="radio-dot"></div>Estou começando do zero
           </div>
         </div>
@@ -622,23 +622,23 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
         <label class="field-label">O que você já tem disponível?</label>
         <div class="checkbox-group" id="cg-materiais">
           <div class="check-item" onclick="selectCheck(this,'cg-materiais')">
-            <input type="checkbox" name="Materiais disponíveis" value="Logo em alta qualidade">
+            <input type="checkbox" name="materiais_disponiveis" value="Logo em alta qualidade">
             <div class="check-box"></div>Logo em alta qualidade
           </div>
           <div class="check-item" onclick="selectCheck(this,'cg-materiais')">
-            <input type="checkbox" name="Materiais disponíveis" value="Fotos profissionais">
+            <input type="checkbox" name="materiais_disponiveis" value="Fotos profissionais">
             <div class="check-box"></div>Fotos profissionais
           </div>
           <div class="check-item" onclick="selectCheck(this,'cg-materiais')">
-            <input type="checkbox" name="Materiais disponíveis" value="Vídeos do trabalho ou espaço">
+            <input type="checkbox" name="materiais_disponiveis" value="Vídeos do trabalho ou espaço">
             <div class="check-box"></div>Vídeos do trabalho ou espaço
           </div>
           <div class="check-item" onclick="selectCheck(this,'cg-materiais')">
-            <input type="checkbox" name="Materiais disponíveis" value="Depoimentos de clientes">
+            <input type="checkbox" name="materiais_disponiveis" value="Depoimentos de clientes">
             <div class="check-box"></div>Depoimentos de clientes
           </div>
           <div class="check-item" onclick="selectCheck(this,'cg-materiais')">
-            <input type="checkbox" name="Materiais disponíveis" value="Nenhum ainda">
+            <input type="checkbox" name="materiais_disponiveis" value="Nenhum ainda">
             <div class="check-box"></div>Nenhum ainda
           </div>
         </div>
@@ -650,15 +650,15 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
         </label>
         <div class="checkbox-group" id="cg-contas">
           <div class="check-item" onclick="selectCheck(this,'cg-contas')">
-            <input type="checkbox" name="Contas existentes" value="Sim, tenho Google Ads">
+            <input type="checkbox" name="contas_existentes" value="Sim, tenho Google Ads">
             <div class="check-box"></div>Sim, tenho Google Ads
           </div>
           <div class="check-item" onclick="selectCheck(this,'cg-contas')">
-            <input type="checkbox" name="Contas existentes" value="Sim, tenho Meta Ads (Gerenciador)">
+            <input type="checkbox" name="contas_existentes" value="Sim, tenho Meta Ads (Gerenciador)">
             <div class="check-box"></div>Sim, tenho Meta Ads (Gerenciador)
           </div>
           <div class="check-item" onclick="selectCheck(this,'cg-contas')">
-            <input type="checkbox" name="Contas existentes" value="Não tenho nenhuma ainda">
+            <input type="checkbox" name="contas_existentes" value="Não tenho nenhuma ainda">
             <div class="check-box"></div>Não tenho nenhuma ainda
           </div>
         </div>
@@ -681,7 +681,7 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
 
       <div class="field">
         <label class="field-label">Observações adicionais <span class="hint">Opcional</span></label>
-        <textarea name="Observações" id="obsTextarea" placeholder=""></textarea>
+        <textarea name="observacoes" id="obsTextarea" placeholder=""></textarea>
       </div>
 
       <div class="nav">
