@@ -864,17 +864,34 @@ textarea{resize:vertical;min-height:88px;line-height:1.6}
   function submitForm() {
     if (!validate()) return;
     var form = document.getElementById('mainForm');
+    var fd = new FormData(form);
+
+    // Debug: logar tudo que vai ser enviado
+    console.log('=== Dados a enviar ===');
+    for (var pair of fd.entries()) {
+      console.log(pair[0] + ' = ' + pair[1]);
+    }
+
     fetch(form.action, {
       method: 'POST',
-      body: new FormData(form),
+      body: fd,
       headers: { 'Accept': 'application/json' }
     }).then(function(res) {
-      if (res.ok) {
-        form.style.display = 'none';
-        document.getElementById('successScreen').style.display = 'block';
-        document.getElementById('progressFill').style.width = '100%';
-      } else { alert('Ops, algo deu errado. Tente novamente.'); }
-    }).catch(function() { alert('Erro de conexão. Verifique sua internet e tente novamente.'); });
+      console.log('Status:', res.status);
+      return res.json().then(function(data) {
+        console.log('Resposta Formspree:', data);
+        if (res.ok) {
+          form.style.display = 'none';
+          document.getElementById('successScreen').style.display = 'block';
+          document.getElementById('progressFill').style.width = '100%';
+        } else {
+          alert('Erro: ' + (data.error || data.errors && JSON.stringify(data.errors) || 'desconhecido'));
+        }
+      });
+    }).catch(function(e) {
+      console.error('Erro de fetch:', e);
+      alert('Erro de conexão: ' + e.message);
+    });
   }
 
   // Remove has-error quando usuário começa a digitar (feedback imediato)
